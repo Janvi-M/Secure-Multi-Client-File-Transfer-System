@@ -1,0 +1,3 @@
+alice:password123
+bob:securepass
+charlie:charlie123
