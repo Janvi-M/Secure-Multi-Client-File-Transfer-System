@@ -1,14 +1,15 @@
-# Distributed File Orchestration and Synchronization - Documentation
+# 📁 Fynk - file sync 
+## Distributed File Orchestration and Synchronization - Documentation
 
-## Overview
+## 🧾 Overview
 
 This system enables secure and synchronized file operations between a client and server. The system allows clients to authenticate, upload, download, preview, delete, and list files on the server. The communication between the client and the server occurs over a TCP connection, utilizing a custom application-layer protocol.
 
 ---
 
-## System Components
+## 🧱 System Components
 
-### 1. **Client**
+### 🖥️ Client
 
 **Purpose:**  
 The client interacts with the server, sending commands and receiving file-related responses.
@@ -18,7 +19,7 @@ The client interacts with the server, sending commands and receiving file-relate
 - **File Operations:** Clients can upload, download, preview, and delete files.
 - **Directory Listing:** Clients can list files stored on the server.
 
-### 2. **Server**
+### 🛠️ Server
 
 **Purpose:**  
 The server processes the commands from clients and handles file operations securely while enforcing authentication and file access rules.
@@ -32,16 +33,16 @@ The server processes the commands from clients and handles file operations secur
 
 ---
 
-## Protocol Specifications
+## 📡 Protocol Specifications
 
-### 1. **Authentication Protocol**
+### 🔐 Authentication Protocol
 
 - **Request:** Client sends `USERNAME: PASSWORD` after receiving the server's prompt.
 - **Server Response:**
   - `AUTH SUCCESSFUL. SESSION STARTED.`
   - `AUTH FAILED. CLOSING CONNECTION.`
 
-### 2. **File Operation Commands**
+### 📤 File Operation Commands
 
 Below is a summary of commands sent by the client and the expected server responses:
 
@@ -53,7 +54,7 @@ Below is a summary of commands sent by the client and the expected server respon
 | `DELETE`    | `DELETE`           | `SEND FILENAME TO DELETE` |
 | `LIST`      | `LIST`             | Directory listing or `"NO FILES FOUND"` |
 
-### 3. **File Transfer Protocol**
+### 🔄 File Transfer Protocol
 
 - Files are transferred in chunks of 4KB.
 - The server sends an `EOF` (End-of-File) marker to signal the end of a file transfer.
@@ -61,7 +62,7 @@ Below is a summary of commands sent by the client and the expected server respon
 
 ---
 
-## Key API References
+## 📦 Key API References
 
 ### 1. **Python Standard Library**
 
@@ -75,7 +76,7 @@ The following Python standard libraries are used:
 
 ---
 
-## Security Considerations
+## 🛡️ Security Considerations
 
 ### 1. **Authentication**
 - User credentials are stored in `id_passwd.txt` in plain text. It is recommended to implement password hashing using libraries such as `bcrypt` or `hashlib`.
@@ -91,7 +92,7 @@ The following Python standard libraries are used:
 
 ---
 
-## Error Handling
+## ❗ Error Handling
 
 ### 1. **Server-Side Errors**
 - Server errors during file operations or invalid commands are logged, and meaningful error messages are sent to the client.
@@ -101,18 +102,16 @@ The following Python standard libraries are used:
 
 ---
 
-## Future Enhancements
+## 🚀 Future Enhancements
 
-### 1. **Encryption**
+### 🔐 Encryption
 - Implement SSL/TLS encryption for secure client-server communication:
   python
   import ssl
   context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
   secure_socket = context.wrap_socket(server_socket, server_side=True)
 
-## Future Enhancements
-
-### 2. Persistent Storage
+### 💾 Persistent Storage
 **Goal:**  
 Replace the plain-text `id_passwd.txt` file with a database for securely storing user credentials.
 
@@ -120,9 +119,7 @@ Replace the plain-text `id_passwd.txt` file with a database for securely storing
 - Use a secure database like SQLite, MySQL, or PostgreSQL to store `username:password` pairs.
 - Ensure passwords are stored using secure hashing and salting techniques (e.g., using `bcrypt` or `hashlib`).
 
----
-
-### 3. Rate Limiting
+### 🚦 Rate Limiting
 **Goal:**  
 Introduce throttling for file upload/download to prevent misuse and optimize server load.
 
@@ -132,7 +129,7 @@ Introduce throttling for file upload/download to prevent misuse and optimize ser
 
 ---
 
-### 4. Compression
+### 📦 Compression
 **Goal:**  
 Use compression (e.g., `gzip`) for file transfers to reduce bandwidth consumption.
 
@@ -142,7 +139,7 @@ Use compression (e.g., `gzip`) for file transfers to reduce bandwidth consumptio
 
 ---
 
-### 5. Log Aggregation
+### 📊 Log Aggregation
 **Goal:**  
 Integrate centralized logging systems (e.g., Elasticsearch and Kibana) for efficient monitoring and troubleshooting.
 
@@ -153,9 +150,9 @@ Integrate centralized logging systems (e.g., Elasticsearch and Kibana) for effic
 
 ---
 
-## Deployment Instructions
+## ⚙️ Deployment Instructions
 
-### 1. Server
+### 🖥️ Server
 
 1. Place the `server.py` file on a machine with a fixed IP address.
 2. Create and populate the `id_passwd.txt` file with `username:password` entries.
@@ -163,12 +160,12 @@ Integrate centralized logging systems (e.g., Elasticsearch and Kibana) for effic
    ```bash
    python server.py
 
-### 2. Client
+### 👤 Client
 
 1. Place the `client.py` file on the user's machine.
 2. Run the client with the following command:
    ```bash
    python client.py
 
-### Conclusion
+## ✅ Conclusion
 This system provides a secure way to handle file operations between a client and server while ensuring data integrity, confidentiality, and efficient error handling. Future enhancements include encryption for secure communication and more advanced features like rate limiting and compression.
