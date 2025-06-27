@@ -1,5 +1,3 @@
-# EC-Team-67-distributed-file-orchestration-and-synchronization
-
 # Distributed File Orchestration and Synchronization - Documentation
 
 ## Overview
